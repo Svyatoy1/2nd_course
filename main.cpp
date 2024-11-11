@@ -12,6 +12,9 @@ private:
 public:
     Complex(double r = 0.0, double i = 0.0) : real(r), imag(i) {}
 
+    double getReal() const { return real; }
+    double getImag() const { return imag; }
+
     Complex operator+(const Complex& other) const {
         return Complex(real + other.real, imag + other.imag);
     }
@@ -29,9 +32,8 @@ public:
         return Complex((real * other.real + imag * other.imag) / denominator, (imag * other.real - real * other.imag) / denominator);
     }
 
-    friend ostream& operator<<(ostream& out, const Complex& c) {
-        out << c.real << (c.imag >= 0 ? " + " : " - ") << (c.imag >= 0 ? c.imag : -c.imag) << "i";
-        return out;
+    void print() const {
+        cout << real << " + " << imag << "i";
     }
 };
 
@@ -108,7 +110,8 @@ void inverseMatrix(const Matrix& A, Matrix& inverse) {
 void printMatrix(const Matrix& matrix) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            cout << matrix[i][j] << " ";
+            matrix[i][j].print();
+            cout << " ";
         }
         cout << endl;
     }
